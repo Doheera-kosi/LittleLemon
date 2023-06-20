@@ -10,7 +10,7 @@ def index(request):
 
 
 # MENUITEM
-class MenuItemView(ListCreateAPIView):
+class MenuItemsView(ListCreateAPIView):
   queryset = Menu.objects.all()
   serializer_class = MenuSerializer
   
