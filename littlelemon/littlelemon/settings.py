@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+print("Loading settings.py...")
 
 from pathlib import Path
 
@@ -29,7 +30,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restaurant',
     'rest_framework',
+    'djoser',
+    'rest_framework.authtoken',  # Add this line
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,17 +78,17 @@ WSGI_APPLICATION = 'littlelemon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#Settings.py 
+# Settings.py
 DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'LittleLemon',
-         'HOST': '127.0.0.1',
-         'PORT': '3306',
-         'USER': 'root',
-         'PASSWORD': 'super',
-         'OPTIONS': {
-             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'LittleLemon',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': 'super',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
 }
@@ -131,3 +134,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DJOSER = {
+    "USER_ID_FIELD": "username",
+}
+
+# Add the TOKEN_MODEL setting
+TOKEN_MODEL = 'rest_framework.authtoken.models.Token'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
