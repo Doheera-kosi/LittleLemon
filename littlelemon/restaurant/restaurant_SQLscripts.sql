@@ -1,0 +1,1 @@
+SELECT * FROM `littlelemon`.`restaurant_booking` LIMIT 1000;
